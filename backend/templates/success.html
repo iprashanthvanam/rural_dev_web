@@ -1,0 +1,24 @@
+<!-- backend\templates\success.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Success</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Success!</h1>
+        <p>Village data has been successfully submitted and processed.</p>
+        <p>Village ID: {{ village_id }}</p>
+        <ul>
+            <li><a href="/outputs/reports/{{ village_id }}_report.pdf" target="_blank">PDF Report</a></li>
+            <li><a href="/outputs/maps/{{ village_id }}_map.png" target="_blank">Map</a></li>
+            <li><a href="/outputs/charts/{{ village_id }}_analytics.png" target="_blank">Analytics Chart</a></li>
+        </ul>
+        <a href="{% url 'input_form' %}">Submit Another Village</a>
+    </div>
+</body>
+</html>
