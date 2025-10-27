@@ -27,4 +27,29 @@
   "env": {
     "PYTHON_VERSION": "3.10"
   }
+
+
+  {
+  "version": 2,
+  "builds": [
+    {
+      "src": "backend/rural_dev/wsgi.py",
+      "use": "@vercel/python",
+      "config": { "maxLambdaSize": "50mb" }
+    },
+    {
+      "src": "backend/staticfiles/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    { "src": "/static/(.*)", "dest": "/backend/staticfiles/$1" },
+    { "src": "/outputs/(.*)", "dest": "/backend/outputs/$1" },
+    { "src": "/(.*)", "dest": "/backend/rural_dev/wsgi.py" }
+  ],
+  "env": {
+    "PYTHON_VERSION": "3.10"
+  }
+}
+
 }
