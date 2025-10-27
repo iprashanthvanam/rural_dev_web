@@ -15,7 +15,7 @@ SECRET_KEY = 'django-insecure-5qv5jr6ry-h8un7y80hj3!n_9012!#&@l_h7zk-0($g8%$!u13
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['ruraldevelopment.pythonanywhere.com']
+ALLOWED_HOSTS = ['.vercel.app']
 
 # Application definition
 INSTALLED_APPS = [
@@ -37,6 +37,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'rural_dev.urls'
@@ -68,7 +70,7 @@ DATABASES = {
         'USER': 'postgres',
         'PASSWORD': 'momo',
         'HOST': 'localhost',
-        'PORT': '5432',
+        'PORT': '3306',
     }
 }
 
