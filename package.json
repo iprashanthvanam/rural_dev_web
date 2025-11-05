@@ -1,0 +1,7 @@
+{
+  "name": "rural-dev-web",
+  "version": "1.0.0",
+  "devDependencies": {
+    "netlify-plugin-debian-packages": "latest"
+  }
+}
