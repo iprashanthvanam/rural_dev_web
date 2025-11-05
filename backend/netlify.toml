@@ -1,12 +1,6 @@
 [build]
-  publish = "public"          # adjust if your static files are elsewhere
-  command = "pip install -r requirements.txt && python manage.py collectstatic --noinput"
+  command = "pip install -r requirements.txt && python rural_dev_web/manage.py collectstatic --noinput"
+  publish = "staticfiles"
 
-# Force Python 3.11 (has pre-built psycopg2-binary wheel)
 [build.environment]
   PYTHON_VERSION = "3.11"
-
-# netlify.toml
-
-
-
