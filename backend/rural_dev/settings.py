@@ -10,12 +10,11 @@ STATIC_URL = '/static/'
 # === NETLIFY DETECTION ===
 ON_NETLIFY = os.environ.get("NETLIFY") == "true"
 
-# === SECURITY ===
-SECRET_KEY = os.environ.get("SECRET_KEY", "django-insecure-change-me")
+SECRET_KEY = os.environ.get("SECRET_KEY", "change-me-in-production")
 DEBUG = False
 ALLOWED_HOSTS = ["*"]
 
-# === APPS ===
+# === APPS (middleware removed!) ===
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -23,17 +22,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'village_app',
 ]
 
-# ONLY add GeoDjango when NOT on Netlify
+# === ONLY ADD GeoDjango when NOT on Netlify ===
 if not ON_NETLIFY:
     INSTALLED_APPS.append('django.contrib.gis')
 
+# === MIDDLEWARE (whitenoise moved HERE) ===
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',   # ← CORRECT PLACE
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -69,7 +68,5 @@ DATABASES = {
     }
 }
 
-# === STATIC ===
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
