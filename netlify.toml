@@ -1,5 +1,6 @@
 [build]
-  command = "apt-get update && apt-get install -y gdal-bin libgdal-dev && pip install -r requirements.txt && python backend/manage.py collectstatic --noinput"
+  command = "pip install -r requirements.txt && python backend/manage.py collectstatic --noinput"
   publish = "staticfiles"
+
 [build.environment]
   PYTHON_VERSION = "3.11"
