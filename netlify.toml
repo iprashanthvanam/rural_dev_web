@@ -6,3 +6,13 @@
 # Force Python 3.11 (has pre-built psycopg2-binary wheel)
 [build.environment]
   PYTHON_VERSION = "3.11"
+
+
+
+[build]
+  command = "python rural_dev_web/manage.py collectstatic --noinput"
+  publish = "staticfiles"
+  environment = { PYTHON_VERSION = "3.11" }
+
+[build.environment]
+  PYTHONUNBUFFERED = "true"
