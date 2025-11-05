@@ -1,6 +1,3 @@
 [build]
-  command = "pip install -r requirements.txt && python rural_dev_web/manage.py collectstatic --noinput"
+  command = "pip install -r requirements.txt && python backend/manage.py collectstatic --noinput"
   publish = "staticfiles"
-
-[build.environment]
-  PYTHON_VERSION = "3.11"
