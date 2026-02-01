@@ -66,6 +66,7 @@ Bashpython -m venv venv
 venv\Scripts\activate
 # Linux/macOS
 source venv/bin/activate
+
 4. Install Dependencies
 Bashpip install --upgrade pip
 pip install django==5.2 psycopg2-binary geopandas matplotlib reportlab django-geo shapely
@@ -74,6 +75,7 @@ Bashconda create -n rural-dev python=3.11
 conda activate rural-dev
 conda install -c conda-forge geopandas
 pip install django psycopg2-binary matplotlib reportlab django-geo shapely
+
 5. Database Setup
 
 Install PostgreSQL + PostGIS
@@ -99,33 +101,13 @@ Apply migrations:
 
 Bashpython manage.py makemigrations
 python manage.py migrate
+
 6. GeoJSON File
 Place your village features GeoJSON file at:
 textC:\Users\<your-username>\Downloads\filtered_output.geojson
 Or update the path inside village_app/utils/gis.py
+
 7. Run the Development Server
 Bashpython manage.py runserver --insecure
 Open browser → http://127.0.0.1:8000/
-What To Do / What NOT To Do
-Recommended Practices
-
-Do thisReason / BenefitAlways use virtual environmentPrevents global pollution & version conflictsUse logging instead of print()Better control, file output, production-readyValidate ALL incoming form dataPrevents crashes & security issuesUse Agg backend for MatplotlibOnly safe backend for web/server environmentsClose figures (plt.close())Prevents memory leaks in long-running serverUse try-except around file I/OHandles permission & path errors gracefullyAdd .gitignore for outputs/, venv/, __pycache__/Keeps repo cleanDocument every major functionHelps future maintainers (including yourself)Test with both valid & invalid dataEnsures robustness
-Things You Should AVOID
-
-Don't do thisWhy you should avoid itUse development server in productionVery slow, insecure, single-threadedHardcode passwords / secretsSecurity risk — use .env + python-dotenvIgnore Matplotlib threading warningsWill crash in multi-threaded environmentsStore generated files in gitBinary files bloat repositorySkip input validationLeads to 500 errors & bad user experienceCommit outputs/ folderGenerated files should not be versionedUse TkAgg / GUI backends on serverWill crash — only Agg is safeForget to close Matplotlib figuresMemory leak → server eventually dies
-Deployment Recommendations
-
-EnvironmentRecommended stackNotesDevelopmentDjango runserver --insecureOnly for local testingStaging / TestingGunicorn + Nginx (or Apache)Realistic performance testProductionGunicorn (4–8 workers) + Nginx + HTTPSSecure & scalableHigh trafficGunicorn + Nginx + Supervisor + Redis cacheAdd caching & task queue
-Common Issues & Fixes
-
-SymptomLikely CauseFixTemplateDoesNotExistWrong template pathCheck TEMPLATES['DIRS'] and app template dirMatplotlib threading crashUsing GUI backend in web threadmatplotlib.use('Agg') at top of fileBrokenPipe errorsSlow map/chart generationMove heavy tasks to Celery or reduce resolution'hospitals_needed' KeyErrorAnalytics function failed silentlyMake sure function always returns full dictPermission denied when saving filesWrong folder permissionsGive write access to outputs/ folderMap looks empty / wrong locationWrong CRS or bad GeoJSONEnsure GeoJSON is EPSG:4326
-Future Enhancements (Roadmap Ideas)
-
-PriorityFeatureEstimated EffortHighUser authentication & multi-village mgmt★★★HighCelery + Redis for background map/report★★★MediumInteractive Folium maps in browser★★MediumExport to Excel + CSV★LowMobile-responsive form & report★★LowVillage comparison dashboard★★★★
-License
-MIT License (or choose your preferred open-source license)
-Feel free to use, modify, distribute — but please give credit if you publish a fork or derivative work.
-Happy Rural Development! 🌾🏘️
-
-
 
