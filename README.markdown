@@ -45,47 +45,6 @@ The project demonstrates a full-stack rural development planning tool using:
 | Recommendations    | Rule-based logic                         | Actionable suggestions               |
 | Logging            | Python logging module                    | Debug & production monitoring        |
 
-## Project Structure
-
-backend/
-├── manage.py
-├── rural_dev/                      # Django project settings
-│   ├── init.py
-│   ├── asgi.py
-│   ├── settings.py
-│   ├── urls.py
-│   └── wsgi.py
-├── village_app/                    # Main application
-│   ├── init.py
-│   ├── admin.py
-│   ├── apps.py
-│   ├── migrations/
-│   ├── models.py
-│   ├── tests.py
-│   ├── urls.py
-│   ├── views.py
-│   ├── templates/
-│   │   └── village_app/
-│   │       ├── input_form.html
-│   │       └── success.html
-│   └── utils/
-│       ├── init.py
-│       ├── analytics.py
-│       ├── ai_recommendations.py
-│       └── gis.py
-├── outputs/                        # Generated files (should be in .gitignore)
-│   ├── maps/
-│   ├── charts/
-│   ├── models/                     # optional / future use
-│   └── reports/
-├── static/                         # CSS, JS, images (if any)
-├── media/                          # user-uploaded files (currently unused)
-├── requirements.txt
-├── .gitignore
-└── README.md
-
-
-
 ## Installation & Setup (Step-by-step)
 
 ### 1. Prerequisites
