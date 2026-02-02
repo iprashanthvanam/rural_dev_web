@@ -3,7 +3,7 @@
 **Full Project Documentation & README**  
 **Last updated:** May 2025  
 **Author:** Prashanth  
-**Location:** Vellore, Tamil Nadu, India  
+**Location:** Hyderabad, Telangana, India  
 
 ---
 
@@ -68,7 +68,7 @@ The project demonstrates a full-stack rural development planning tool using:
 
 ### 2. Clone & Enter Project
 
-bash
+```bash
 git clone <your-repo-url>
 cd rural-dev-web/backend
 
@@ -116,6 +116,7 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+
 
 ---
 
