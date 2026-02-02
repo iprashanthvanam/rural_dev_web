@@ -3,7 +3,9 @@
 **Full Project Documentation & README**  
 **Last updated:** May 2025  
 **Author:** Prashanth  
-**Location:** Vellore, Tamil Nadu, India
+**Location:** Vellore, Tamil Nadu, India  
+
+---
 
 ## Project Overview
 
@@ -17,33 +19,41 @@ Village Development is a Django-based web application created to assist rural pl
 
 The project demonstrates a full-stack rural development planning tool using:
 
-- Django (web framework)
-- PostgreSQL + PostGIS (spatial database)
-- GeoPandas + Matplotlib (static map generation)
-- ReportLab (PDF generation)
-- Rule-based recommendation engine
+- **Django** (web framework)
+- **PostgreSQL + PostGIS** (spatial database)
+- **GeoPandas + Matplotlib** (static map generation)
+- **ReportLab** (PDF generation)
+- **Rule-based recommendation engine**
+
+---
 
 ## Features
 
-- Web form for entering comprehensive village data (demographic, infrastructure, geographic, administrative)
-- Real-time calculation of key development metrics
-- AI-style recommendations across 9+ categories (infrastructure, education, health, sustainability, etc.)
-- Static map generation with emoji annotations for existing & suggested facilities
-- Multi-page landscape PDF report with header, overview, infrastructure assessment, analysis, recommendations and declaration
-- Robust error handling & logging
-- Thread-safe Matplotlib usage in server environment
+- **Data Entry:** Web form for entering comprehensive village data (demographic, infrastructure, geographic, administrative).
+- **Analytics:** Real-time calculation of key development metrics.
+- **AI Recommendations:** Rule-based suggestions across 9+ categories (infrastructure, education, health, sustainability, etc.).
+- **Mapping:** Static map generation with emoji annotations for existing & suggested facilities.
+- **Reporting:** Multi-page landscape PDF report with header, overview, infrastructure assessment, analysis, recommendations, and declaration.
+- **Reliability:** Robust error handling, logging, and thread-safe Matplotlib usage.
+
+---
 
 ## Tech Stack
 
-| Layer              | Technology                              | Purpose                              |
-|---------------------|------------------------------------------|--------------------------------------|
-| Backend            | Django 5.2                               | Web framework, ORM, views, routing   |
-| Database           | PostgreSQL 15 + PostGIS                  | Relational + spatial data storage    |
-| Mapping            | GeoPandas, Matplotlib ('Agg' backend)    | Static 2D map generation             |
-| PDF Generation     | ReportLab                                | Professional multi-page PDF reports  |
-| Analytics          | Pure Python + Matplotlib                 | Metric calculation & bar charts      |
-| Recommendations    | Rule-based logic                         | Actionable suggestions               |
-| Logging            | Python logging module                    | Debug & production monitoring        |
+| Layer | Technology | Purpose |
+|------|------------|---------|
+| **Backend** | Django 5.2 | Web framework, ORM, views, routing |
+| **Database** | PostgreSQL 15 + PostGIS | Relational + spatial data storage |
+| **Mapping** | GeoPandas, Matplotlib ('Agg') | Static 2D map generation |
+| **PDF Gen** | ReportLab | Professional multi-page PDF reports |
+| **Analytics** | Pure Python + Matplotlib | Metric calculation & bar charts |
+| **Logic** | Rule-based logic | Actionable suggestions |
+| **Logging** | Python logging module | Debug & production monitoring |
+
+---
+
+
+---
 
 ## Installation & Setup (Step-by-step)
 
@@ -54,39 +64,49 @@ The project demonstrates a full-stack rural development planning tool using:
 - Git (optional)
 - Virtual environment tool (venv / virtualenv / conda)
 
-### 2. Clone / Create Project Folder
+---
+
+### 2. Clone & Enter Project
 
 bash
-git clone <your-repo-url> rural-dev-web
+git clone <your-repo-url>
 cd rural-dev-web/backend
 
-3. Create & Activate Virtual Environment
-Bashpython -m venv venv
-# Windows
+For windows:
+python -m venv venv
 venv\Scripts\activate
-# Linux/macOS
+
+For Linux/Mac
+python3 -m venv venv
 source venv/bin/activate
 
-4. Install Dependencies
-Bashpip install --upgrade pip
+---
+
+### 3. Install Dependencies
+
+pip install --upgrade pip
 pip install django==5.2 psycopg2-binary geopandas matplotlib reportlab django-geo shapely
-Windows users with GeoPandas issues — you may need to install precompiled wheels or use conda:
-Bashconda create -n rural-dev python=3.11
+Simply : pip install -r requirements.txt
+
+---
+
+### 4. Windows (GeoPandas issues – Conda recommended)
+
+conda create -n rural-dev python=3.11
 conda activate rural-dev
 conda install -c conda-forge geopandas
 pip install django psycopg2-binary matplotlib reportlab django-geo shapely
 
-5. Database Setup
+---
 
-Install PostgreSQL + PostGIS
-Create database:
+### 5. Database Setup
 
-Bashcreatedb -U postgres village_web_db
+createdb -U postgres village_web_db
 psql -U postgres -d village_web_db -c "CREATE EXTENSION postgis;"
 
 Update rural_dev/settings.py:
 
-PythonDATABASES = {
+DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'village_web_db',
@@ -97,17 +117,48 @@ PythonDATABASES = {
     }
 }
 
-Apply migrations:
+---
 
-Bashpython manage.py makemigrations
+### 6. Apply Migrations
+
+python manage.py makemigrations
 python manage.py migrate
 
-6. GeoJSON File
-Place your village features GeoJSON file at:
-textC:\Users\<your-username>\Downloads\filtered_output.geojson
-Or update the path inside village_app/utils/gis.py
 
-7. Run the Development Server
-Bashpython manage.py runserver --insecure
-Open browser → http://127.0.0.1:8000/
+---
+
+### 7. GeoJSON File Configuration
+
+Place your village GeoJSON file at:
+C:\Users\<your-username>\Downloads\filtered_output.geojson
+
+OR update the path inside:
+village_app/utils/gis.py
+
+---
+
+### 8. Run Development Server
+
+python manage.py runserver --insecure
+Open browser:
+👉 http://127.0.0.1:8000/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
