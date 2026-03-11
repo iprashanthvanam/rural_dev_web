@@ -1,15 +1,55 @@
 
 
+# from django.contrib import admin
+# from django.urls import path, include
+# from django.conf import settings
+# from django.conf.urls.static import static
 
-# backend\rural_dev\urls.py
+
+
+# from django.views.static import serve
+# from django.urls import re_path
+# import os
+# from django.conf import settings
+
+
+# urlpatterns = [
+#     path('admin/', admin.site.urls),
+#     path('', include('village_app.urls')),
+# ]
+
+# if settings.DEBUG:
+#     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+# OUTPUT_DIR = os.path.join(settings.BASE_DIR, "outputs")
+
+# urlpatterns += [
+#     re_path(r'^outputs/(?P<path>.*)$', serve, {'document_root': OUTPUT_DIR}),
+# ]
+
+
+
+
+
+
+
+
+
 
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
+from django.views.static import serve
 from django.conf import settings
-from django.conf.urls.static import static
+import os
 
-# backend\rural_dev\urls.py
+OUTPUT_DIR = os.path.join(settings.BASE_DIR, "outputs")
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('village_app.urls')),
-] + static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0]) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+
+urlpatterns += [
+    re_path(r'^outputs/(?P<path>.*)$', serve, {'document_root': OUTPUT_DIR}),
+]

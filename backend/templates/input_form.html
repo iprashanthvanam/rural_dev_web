@@ -6,7 +6,264 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Village Development Input Form</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'css/styles.css' %}"> -->
+     <style>
+        /* ==========================================================================
+   CSS Variables & Reset
+   ========================================================================== */
+:root {
+    --primary: #4f46e5;
+    --primary-hover: #4338ca;
+    --secondary: #ec4899;
+    --bg-gradient: linear-gradient(135deg, #f0f4ff 0%, #e0e7ff 100%);
+    --card-bg: rgba(255, 255, 255, 0.85);
+    --text-main: #1f2937;
+    --text-muted: #6b7280;
+    --border-color: #d1d5db;
+    --input-bg: #ffffff;
+    --focus-ring: rgba(79, 70, 229, 0.3);
+    --error: #ef4444;
+    --success: #10b981;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg-gradient);
+    color: var(--text-main);
+    line-height: 1.5;
+    min-height: 100vh;
+    padding: 2rem 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* ==========================================================================
+   Main Container & Typography
+   ========================================================================== */
+.container {
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 1.5rem;
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 1000px;
+    box-shadow: var(--shadow-lg);
+    animation: slideUpFade 0.6s ease-out forwards;
+}
+
+h1 {
+    text-align: center;
+    font-size: 2.25rem;
+    font-weight: 800;
+    margin-bottom: 2rem;
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.025em;
+}
+
+h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+/* Hide legacy HTML line breaks to let CSS control spacing */
+.form-section br {
+    display: none; 
+}
+
+/* ==========================================================================
+   Form Layout (CSS Grid)
+   ========================================================================== */
+#villageForm {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+.form-section {
+    background: rgba(255, 255, 255, 0.5);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-section:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* ==========================================================================
+   Inputs, Selects, and Labels
+   ========================================================================== */
+label {
+    display: block;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--text-main);
+    margin-top: 1rem;
+    margin-bottom: 0.4rem;
+}
+
+/* Remove top margin for the first label in a section */
+.form-section h2 + label {
+    margin-top: 0;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    font-family: inherit;
+    color: var(--text-main);
+    background-color: var(--input-bg);
+    border: 2px solid var(--border-color);
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+input[type="text"]:hover,
+input[type="number"]:hover,
+select:hover {
+    border-color: #a78bfa;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px var(--focus-ring);
+    transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   Custom Checkbox Animation
+   ========================================================================== */
+input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 1.4rem;
+    height: 1.4rem;
+    border: 2px solid var(--border-color);
+    border-radius: 0.35rem;
+    background-color: var(--input-bg);
+    cursor: pointer;
+    position: relative;
+    top: 5px; /* Align with text */
+    margin-right: 0.5rem;
+    transition: all 0.2s ease-in-out;
+}
+
+input[type="checkbox"]:hover {
+    border-color: var(--primary);
+    transform: scale(1.05);
+}
+
+input[type="checkbox"]:checked {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    animation: popIn 0.3s ease;
+}
+
+input[type="checkbox"]:checked::after {
+    content: "";
+    position: absolute;
+    left: 30%;
+    top: 10%;
+    width: 25%;
+    height: 50%;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+/* Adjust label inline behavior for checkboxes */
+label:has(+ input[type="checkbox"]),
+input[type="checkbox"] + label {
+    display: inline-block;
+    margin-top: 1rem;
+}
+
+/* ==========================================================================
+   Submit Button
+   ========================================================================== */
+button[type="submit"] {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    color: white;
+    font-size: 1.125rem;
+    font-weight: 700;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 0.75rem;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(79, 70, 229, 0.4);
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+}
+
+button[type="submit"]:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(79, 70, 229, 0.5);
+}
+
+button[type="submit"]:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 10px rgba(79, 70, 229, 0.3);
+}
+
+/* ==========================================================================
+   Animations & Media Queries
+   ========================================================================== */
+@keyframes slideUpFade {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes popIn {
+    0% { transform: scale(0.8); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Desktop Grid Layout */
+@media (min-width: 768px) {
+    #villageForm {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* Make Basic Info span full width if you prefer, or let it fit the grid */
+    .form-section:nth-child(2) { 
+        grid-row: span 2; /* Let Infrastructure stretch down */
+    }
+}
+     </style>
     <script src="{% static 'js/scripts.js' %}"></script>
 </head>
 <body>
@@ -141,6 +398,35 @@
             <button type="submit">Submit</button>
         </form>
     </div>
-    <script src="{% static 'js/scripts.js' %}"></script>
+    <!-- <script src="{% static 'js/scripts.js' %}"></script> -->
+     <script>
+        // backend/static/js/scripts.js
+document.getElementById('villageForm').addEventListener('submit', function(event) {
+    const inputs = document.querySelectorAll('input[type="number"]');
+    for (let input of inputs) {
+        if (input.value < 0) {
+            event.preventDefault();
+            alert(`${input.name} cannot be negative.`);
+            return;
+        }
+    }
+
+    const literacyRate = document.getElementById('literacy_rate').value;
+    if (literacyRate < 0 || literacyRate > 100) {
+        event.preventDefault();
+        alert('Literacy rate must be between 0 and 100.');
+        return;
+    }
+
+    const greenCover = document.getElementById('green_cover').value;
+    if (greenCover < 0 || greenCover > 100) {
+        event.preventDefault();
+        alert('Green cover percentage must be between 0 and 100.');
+        return;
+    }
+});
+
+
+     </script>
 </body>
 </html>
